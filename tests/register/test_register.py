@@ -68,4 +68,4 @@ class TestRegister:
         # response3 = requests.post(url=f'{BASE_URL}/register', json=body1)
         # assert response3.status_code == 400
         # assert response3.json().get('message') == 'Username and password are required fields'
-        
+        Hi
