@@ -1,6 +1,8 @@
 import requests
 from requests import Response
 
+from fixtures.register.model import RegisterObj
+
 
 class Auth:
     def __init__(self, app):
@@ -8,5 +10,5 @@ class Auth:
 
     POST_AUTH = "/auth"
 
-    def auth_user(self, body: dict) -> Response:
-        return requests.post(url=f"{self.app.url}{self.POST_AUTH}", json=body)
+    def auth_user(self, body: RegisterObj) -> Response:
+        return self.app.client.request('POST', url=f"{self.app.url}{self.POST_AUTH}", json=body.to_dict())

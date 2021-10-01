@@ -1,5 +1,6 @@
-import requests
 from requests import Response
+
+from fixtures.register.model import RegisterObj
 
 
 class Register:
@@ -8,5 +9,6 @@ class Register:
 
     POST_REGISTER = "/register"
 
-    def register_user(self, body: dict) -> Response:
-        return requests.post(url=f"{self.app.url}{self.POST_REGISTER}", json=body)
+    def register_user(self, body: RegisterObj) -> Response:
+        return self.app.client.\
+            request('POST', url=f"{self.app.url}{self.POST_REGISTER}", json=body.to_dict())

@@ -2,6 +2,7 @@ import requests
 from faker import Faker
 
 from fixtures import app
+from fixtures.register.model import RegisterObj
 
 BASE_URL = "https://stores-tests-api.herokuapp.com"
 fake = Faker()
@@ -14,7 +15,8 @@ class TestAuth:
         2. Check that status code is 200
         3. Check response
        """
-        body = {'username': fake.email(), 'password': fake.password()}
+        body_old = {'username': fake.email(), 'password': fake.password()}
+        body = RegisterObj.random()
         res = app.register.register_user(body)
         assert res.status_code == 201
         assert res.json().get('message') == 'User created successfully.'
@@ -30,6 +32,7 @@ class TestAuth:
         # # Auth user
         # response2 = requests.post(url=f'{BASE_URL}/auth', json=body)
         # assert response2.status_code == 200
+
 
     def test_auth_invalid_data(self, app):
         """
